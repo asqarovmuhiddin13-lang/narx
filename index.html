@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mahsulotlar galereyasi</title>
+<title>Poliklinika pullik xizmat narxlari</title>
 
 <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -35,7 +35,7 @@ p {
 /* Swiper container */
 .swiper-container {
     width: 100%;
-    height: 70vh; /* ekranga mos */
+    height: 70vh; /* mobil ekran uchun mos */
     position: relative;
 }
 
@@ -47,7 +47,7 @@ p {
     position: relative;
 }
 
-.product-img {
+.service-img {
     width: 90%;
     max-width: 400px;
     border-radius: 10px;
@@ -57,7 +57,7 @@ p {
 </head>
 <body>
 
-<h2>Mahsulotlar galereyasi</h2>
+<h2>Poliklinika pullik xizmat narxlari</h2>
 <p>QR kodni skaner qiling va barcha narxlarni ko‘ring</p>
 <img src="qr_main.png" id="main-qr" alt="Bitta QR kod">
 
@@ -69,7 +69,7 @@ p {
       for (let i = 1; i <= 32; i++) {
         document.write(`
           <div class="swiper-slide">
-            <img src="prays${i}.png" class="product-img" alt="Mahsulot ${i}">
+            <img src="prays${i}.png" class="service-img" alt="Xizmat ${i}">
           </div>
         `);
       }
