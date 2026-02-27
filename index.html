@@ -5,93 +5,108 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Poliklinika pullik xizmatlar</title>
 
-<!-- Swiper CSS -->
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-
 <style>
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f2f2f2;
+    background: #f4f6f9;
     text-align: center;
 }
 
-h2 {
-    margin-top: 15px;
+h1 {
+    padding: 15px;
+    background: #0d6efd;
+    color: white;
+    margin: 0;
 }
 
-p {
-    margin-bottom: 10px;
-    font-size: 1em;
+.slider-container {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
 }
 
-/* Bitta QR kod sahifa boshida */
-#main-qr {
-    width: 100px;
-    margin: 10px auto 20px auto;
-    display: block;
+.slide {
+    display: none;
 }
 
-/* Swiper container */
-.swiper-container {
+.slide img {
     width: 100%;
-    height: 70vh; /* mobil ekran uchun mos */
-    position: relative;
+    height: auto;
 }
 
-/* Swiper slide */
-.swiper-slide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    user-select: none;
+    transform: translateY(-50%);
 }
 
-.service-img {
-    width: 90%;
-    max-width: 400px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.counter {
+    margin: 10px;
+    font-weight: bold;
 }
 </style>
 </head>
+
 <body>
 
-<h2>Poliklinika pullik narxlar</h2>
-<p>QR kodni skaner qiling va barcha narxlarni ko‘ring</p>
-<img src="qr_main.png" id="main-qr" alt="Bitta QR kod">
+<h1>Poliklinika pullik xizmatlar</h1>
 
-<!-- Swiper galereya -->
-<div class="swiper-container">
-  <div class="swiper-wrapper">
-    <!-- 32 ta rasm -->
-    <script>
-      for (let i = 1; i <= 32; i++) {
-        document.write(`
-          <div class="swiper-slide">
-            <img src="prays${i}.png" class="service-img" alt="">
-          </div>
-        `);
-      }
-    </script>
-  </div>
+<div class="slider-container" id="slider"></div>
 
-  <!-- Navigatsiya tugmalari -->
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div>
-
-<!-- Swiper JS -->
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<div class="counter" id="counter"></div>
 
 <script>
-var swiper = new Swiper('.swiper-container', {
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-    loop: false,
-});
+let currentSlide = 1;
+let totalSlides = 32;
+
+const slider = document.getElementById("slider");
+
+for(let i = 1; i <= totalSlides; i++) {
+    slider.innerHTML += `
+        <div class="slide">
+            <img src="prays${i}.jpg" alt="Rasm ${i}">
+        </div>
+    `;
+}
+
+slider.innerHTML += `
+    <a class="prev" onclick="changeSlide(-1)">❮</a>
+    <a class="next" onclick="changeSlide(1)">❯</a>
+`;
+
+const slides = document.getElementsByClassName("slide");
+const counter = document.getElementById("counter");
+
+function showSlide(n) {
+    if(n > slides.length) currentSlide = 1;
+    if(n < 1) currentSlide = slides.length;
+
+    for(let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    slides[currentSlide - 1].style.display = "block";
+    counter.innerText = currentSlide + " / " + totalSlides;
+}
+
+function changeSlide(n) {
+    currentSlide += n;
+    showSlide(currentSlide);
+}
+
+showSlide(currentSlide);
 </script>
 
 </body>
